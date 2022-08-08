@@ -1,0 +1,13 @@
+#!/bin/bash -x
+
+readonly target_domain=${1:-google.com}
+
+ip a
+netstat -rn
+
+dig ${target_domain}
+dig @8.8.8.8 ${target_domain}
+dig TXT region.dnsimple.com +short
+dig TXT ${target_domain}
+dig TXT region.dnsimple.com +trace
+dig ${target_domain} +trace +dnssec

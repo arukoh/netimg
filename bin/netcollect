@@ -5,6 +5,7 @@ readonly target_domain=${1:-google.com}
 ip a
 netstat -rn
 
+whois ${target_domain}
 dig ${target_domain}
 dig @8.8.8.8 ${target_domain}
 dig TXT region.dnsimple.com +short

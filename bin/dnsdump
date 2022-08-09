@@ -1,0 +1,20 @@
+#!/bin/bash
+
+readonly target_domain=${1:-download.microsoft.com}
+readonly nameserver=${2}
+readonly outfile=${PCAPFILE:-dnsdump.pcap}
+
+tcpdump -vv -X -i eth0 udp port 53 or tcp port 53 -w ${outfile} &
+sleep 5
+
+if [ -n "$nameserver" ]; then
+  dig @${nameserver} ${target_domain}
+else
+  dig ${target_domain}
+fi
+
+sleep 5
+kill -2 $(ps ax | grep [t]cpdump | awk '{print $1}')
+sleep 5
+
+echo -e "\n\ntcpdump to ${outfile}"

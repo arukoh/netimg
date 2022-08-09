@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly target_domain=${1:-download.microsoft.com}
+readonly target_domain=${1:-registry.yarnpkg.com}
 readonly nameserver=${2}
 readonly outfile=${PCAPFILE:-dnsdump.pcap}
 
